@@ -10,10 +10,15 @@ import { Checkbox } from "react-native-paper";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ hidePassword, setHidePassword ] = useState(true);
 
   const onFooterLinkPress = () => {
     navigation.navigate("Registration");
   };
+
+  const togglePasswordDisplay = () => {
+    setHidePassword(!hidePassword);
+  }
 
   const onLoginPress = () => {
     firebase
@@ -54,19 +59,15 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={ background } style={{ flex: 1 }}>
-        <KeyboardAwareScrollView
-          style={{ flex: 1, width: "100%" }}
-          keyboardShouldPersistTaps="always"
-        >
-          <Text style={{ fontSize: 45, fontFamily: 'CandaraBold', marginLeft: 60, marginTop: 250 }}>
+    <ImageBackground source={ background } style={{ flex: 1, justifyContent: 'center' }}>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps='true' contentContainerStyle={{ flex: 1, marginTop: '40%', alignItems: 'center' }}>
+          <Text style={{ fontSize: 45, fontFamily: 'CandaraBold', width: '75%', textAlign: 'left' }}>
             Welcome!
           </Text>
-          <Text style={{ fontSize: 20, fontFamily: 'Candara', marginLeft: 60, marginRight: 60 }}>
+          <Text style={{ fontSize: 20, fontFamily: 'Candara', width: '75%', textAlign: 'left' }}>
             You are a few clicks away from the city's best parking.
           </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', width: '75%', backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 10, borderColor: '#BDBDBD', borderWidth: 1, padding: 5 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', width: '75%', backgroundColor: 'white', borderRadius: 10, marginTop: 10, borderColor: '#BDBDBD', borderWidth: 1, padding: 5 }}>
             <Image source={require('../../../assets/account.png')} style={{ width: 20, height: 20, margin: 5 }}  />
             <TextInput
               style={styles.input}
@@ -78,26 +79,28 @@ export default function LoginScreen({ navigation }) {
               autoCapitalize="none"
             />
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', width: '75%', backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 30, borderColor: '#BDBDBD', borderWidth: 1, padding: 5 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', width: '75%', backgroundColor: 'white', borderRadius: 10, marginTop: 30, borderColor: '#BDBDBD', borderWidth: 1, padding: 5 }}>
             <Image source={require('../../../assets/lock.png')} style={{ width: 20, height: 20, margin: 5 }}  />
             <TextInput
               style={styles.input}
               placeholderTextColor="#aaaaaa"
-              secureTextEntry
+              secureTextEntry={hidePassword}
               placeholder="Password"
               onChangeText={(text) => setPassword(text)}
               value={password}
               underlineColorAndroid="transparent"
               autoCapitalize="none"
             />
-            <Image source={require('../../../assets/eye.png')} style={{ width: 30, height: 30 }}  />
+            <TouchableOpacity onPress={() => togglePasswordDisplay()}>
+              <Image source={require('../../../assets/eye.png')} style={{ width: 30, height: 30 }}  />
+            </TouchableOpacity>
           </View>
           <View style={{ flexDirection: 'row', width: '75%', borderColor: 'black', borderWidth: 0, alignItems: 'center', alignSelf: 'center', marginTop: 20 }}>
             <View style={{backgroundColor: 'white', width: 15, flexDirection: 'row' }}>
               <Ionicons name="ios-checkbox-outline" size={20} color="black" style={{ marginTop: -3, marginBottom: -4 }} />
             </View>
             <Text style={{ fontSize: 14, fontFamily: 'Candara', marginTop: 5 }}> Remember me?</Text>
-            <Text style={{ fontSize: 14, fontFamily: 'Candara', marginTop: 5, marginLeft: 90 }}> Forgot Password?</Text>
+            <Text style={{ fontSize: 14, fontFamily: 'Candara', marginTop: 5, marginLeft: '20%' }}> Forgot Password?</Text>
           </View>
           <View style={{ flexDirection: 'row'}}>
           </View>
@@ -105,7 +108,6 @@ export default function LoginScreen({ navigation }) {
             <Text style={styles.buttonTitle}>Log in</Text>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
-      </ImageBackground>
-    </View>
+    </ImageBackground>
   );
 }

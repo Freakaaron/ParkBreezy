@@ -17,6 +17,7 @@ export default function RegistrationScreen({ navigation }) {
   const [ lastName, setLastName ] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ hidePassword, setHidePassword ] = useState(true);
 
   /*const [fullName, setFullName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");*/
@@ -27,6 +28,10 @@ export default function RegistrationScreen({ navigation }) {
   const onFooterLinkPress = () => {
     navigation.navigate("Login");
   };
+
+  const togglePasswordDisplay = () => {
+    setHidePassword(!hidePassword);
+  }
 
   const onRegisterPress = () => {
     if (password !== confirmPassword) {
@@ -62,14 +67,14 @@ export default function RegistrationScreen({ navigation }) {
 
   return (
     <ImageBackground source={ background } style={{ flex: 1, justifyContent: 'center' }}>
-      <View style={{ width: '75%', alignSelf: 'center' }}>
-        <Text style={{ fontSize: 45, fontFamily: 'CandaraBold'}}>
+      <KeyboardAwareScrollView keyboardShouldPersistTaps='true' contentContainerStyle={{ flex: 1, marginTop: '40%', alignItems: 'center' }}>
+        <Text style={{ fontSize: 45, fontFamily: 'CandaraBold', textAlign: 'left', width: '75%' }}>
           Welcome!
         </Text>
-        <Text style={{ fontSize: 20, fontFamily: 'Candara' }}>
+        <Text style={{ fontSize: 20, fontFamily: 'Candara', textAlign: 'left', width: '75%' }}>
           You are a few clicks away from the city's best parking.
         </Text>
-        <View style={{ flexDirection: 'row', width: '100%', marginTop: 40 }}>
+        <View style={{ flexDirection: 'row', width: '75%', marginTop: 40 }}>
           <TextInput
             placeholder='First Name'
             placeholderTextColor='#828282'
@@ -83,7 +88,7 @@ export default function RegistrationScreen({ navigation }) {
             style={{ height: 48, padding: 10, fontSize: 16, borderRadius: 8, borderColor: '#BDBDBD', borderWidth: 1, width: '48%', marginLeft: '4%' }}
           />
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 30, borderColor: '#BDBDBD', borderWidth: 1, height: 48 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', width: '75%', backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 30, borderColor: '#BDBDBD', borderWidth: 1, height: 48 }}>
           <Image source={require('../../../assets/account.png')} style={{ width: 20, height: 20, margin: 5 }}  />
           <TextInput
             style={{ padding: 10, fontSize: 16, width: '90%'}}
@@ -95,24 +100,26 @@ export default function RegistrationScreen({ navigation }) {
             autoCapitalize="none"
           />
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 30, borderColor: '#BDBDBD', borderWidth: 1, height: 48 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', width: '75%', backgroundColor: 'white', borderRadius: 10, alignSelf: 'center', marginTop: 30, borderColor: '#BDBDBD', borderWidth: 1, height: 48 }}>
           <Image source={require('../../../assets/lock.png')} style={{ width: 20, height: 20, margin: 5 }}  />
           <TextInput
-            style={{ padding: 10, fontSize: 16, width: '80%'}}
+            style={{ padding: 10, fontSize: 16, width: '75%'}}
             placeholderTextColor="#aaaaaa"
-            secureTextEntry
+            secureTextEntry={hidePassword}
             placeholder="Password"
             onChangeText={(text) => setPassword(text)}
             value={password}
             underlineColorAndroid="transparent"
             autoCapitalize="none"
           />
-          <Image source={require('../../../assets/eye.png')} style={{ marginLeft: 0, width: 30, height: 30 }}  />
+          <TouchableOpacity onPress={() => togglePasswordDisplay()}>
+            <Image source={require('../../../assets/eye.png')} style={{ marginLeft: 0, width: 30, height: 30 }}  />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ width: '100%', backgroundColor: '#EA3661', justifyContent: 'center', height: 48, marginTop: 40, alignItems: 'center', borderRadius: 8 }} onPress={() => navigation.navigate('Registration')}>
-            <Text style={{ fontSize: 22, fontFamily: 'CandaraBold', color: '#FFFFFF', paddingTop: 8 }}>Sign Up</Text>
+        <TouchableOpacity style={{ width: '75%', backgroundColor: '#EA3661', justifyContent: 'center', height: 48, marginTop: 40, alignItems: 'center', borderRadius: 8 }} onPress={() => navigation.navigate('Registration')}>
+            <Text style={{ fontSize: 22, fontFamily: 'CandaraBold', color: '#FFFFFF', paddingTop: 8 }}>Continue</Text>
         </TouchableOpacity>
-      </View>
+      </KeyboardAwareScrollView>
       {/*<TextInput
         style={styles.input}
         placeholder="Full Name"
