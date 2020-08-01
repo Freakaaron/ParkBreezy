@@ -7,6 +7,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, MainScreen } from "./src/s
 import { decode, encode } from "base-64";
 import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
+import LanguageScreen from "./src/screens/LanguageScreen/LanguageScreen";
 if (!global.btoa) {
   global.btoa = encode;
 }
@@ -74,6 +75,7 @@ export default function App() {
             <Stack.Screen name="Home" component={HomeScreen} options={{ headerTintColor: '#000000' }} />
             <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerTintColor: '#000000', headerTransparent: true, title: '' }} />
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerTintColor: '#000000', headerTransparent: true, title: '' }} />
+            <Stack.Screen name="Language" component={LanguageScreen} options={{ headerTintColor: '#000000', headerTransparent: true, title: '' }} />
           </Stack.Navigator>
         </NavigationContainer>
       )}
