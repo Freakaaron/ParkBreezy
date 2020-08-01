@@ -14,6 +14,7 @@ import { decode, encode } from "base-64";
 import * as SQLite from "expo-sqlite";
 import * as FileSystem from "expo-file-system";
 import LanguageScreen from "./src/screens/LanguageScreen/LanguageScreen";
+import LoadingScreen from "./src/screens/LoadingScreen/LoadingScreen";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -87,8 +88,8 @@ export default function App() {
               )
             ) : (
               <Stack.Screen
-                name="Main"
-                component={MainScreen}
+                name="Load"
+                component={LoadingScreen}
                 options={{
                   headerTintColor: "#000000",
                   headerTransparent: true,
