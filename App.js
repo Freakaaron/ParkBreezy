@@ -78,7 +78,7 @@ export default function App() {
           <Stack.Navigator>
             {user ? (
               user["is_logged"] ? (
-                <Stack.Screen name="Map" component={MapScreen} />
+                <Stack.Screen name="Map" component={MapScreen} style={{ headerLeft: null }} />
               ) : (
                 <Stack.Screen
                   name="Login"
@@ -136,6 +136,7 @@ export default function App() {
                 headerTintColor: "#000000",
                 headerTransparent: true,
                 title: "",
+                headerLeft: null,
               }}
             />
           </Stack.Navigator>
